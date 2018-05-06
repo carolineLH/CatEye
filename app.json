@@ -5,7 +5,12 @@
         "pages/my/index",
         "pages/cinema/index",
         "pages/logs/logs",
-        "pages/switchcity/switchcity"
+        "pages/switchcity/switchcity",
+        "pages/comments/comments",
+        "pages/order/order",
+        "pages/order-list/index",
+        "pages/like/like",
+        "pages/search/search"
     ],
     "window": {
         "backgroundTextStyle": "white",

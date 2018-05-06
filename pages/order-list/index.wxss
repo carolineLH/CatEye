@@ -1,0 +1,75 @@
+.container{
+    width: 100%;
+    background-color: #F2f2f2;
+}
+.no-order{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    top: 88rpx;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 203rpx;
+    background-color: #F2f2f2;
+}
+.no-order-img{
+    width: 81rpx;
+    height: 96rpx;
+    margin-bottom: 31rpx;
+}
+.no-order .text{
+    font-size:28rpx;
+    color:#999999;
+    text-align: center
+}
+.goods-img-container {
+    width: 90%;
+    margin:auto;
+    border-bottom: 1rpx solid #999999;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.goods-img-container .goods-img {
+    width: 80px;
+    height: 100px;
+}
+.goods-img-container .good-bd {
+    float: right;
+    width: 70%;
+}
+.goods-img-container .right-top {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+.clear {
+    clear: both;
+}
+.goods-img-container .good-bd .number {
+    color: #999999;
+    display: inline-block;
+    padding-top: 60px;
+}
+.price-box {
+    padding-top: 10px;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+}
+.price-box .total-price,.topay-btn {
+    color: red;
+}
+.price-box .btn {
+    font-size: 14px;
+    padding:4px 8px;
+}
+.price-box .cancel-btn {
+    border: 1px solid #999999;
+}
+.price-box .topay-btn {
+    border: 1px solid red;
+}

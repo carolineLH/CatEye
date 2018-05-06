@@ -1,0 +1,48 @@
+.comments{
+	/* margin-top:20px; */
+    background: #fff;
+}
+.comments .item{
+	display: flex;
+    padding:10px;
+}
+.comments .item image{
+	width:40px;
+	height:40px;
+	border-radius:50%;
+}
+.comments .nickname{
+	font-size:14px;
+}
+.comments .main{
+	padding-bottom: 10px;
+	border-bottom:1px solid #ccc;
+    width: 80%;
+}
+.comments .main .content{
+	padding-top: 5px;
+}
+.comments .time {
+    font-size: 12px;
+    color: gray;
+    margin-top: 10px;
+    float: right;
+}
+.comments .img{
+	margin-right:20px;
+}
+.comments .allComments {
+    border-bottom: 1px solid #ccc;
+    display: block;
+    margin-bottom: 60px;
+    height: 30px;
+}
+.preferential-purchase{
+	position: fixed;
+	width:100%;
+	bottom:0;
+	background: #dd4021;
+	color:#fff;
+	text-align: center;
+    padding:10px 0;
+}

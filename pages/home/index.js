@@ -48,7 +48,7 @@ Page({
         wx.getStorage({
             key: 'key',
             success: function(res) {
-                console.log(res.data.cardmes.city);
+                // console.log(res.data.cardmes.city);
                 that.setData({
                     city: res.data.cardmes.city,
                 })
@@ -80,24 +80,25 @@ Page({
     BuyIt: function(res) {
         var id = res.currentTarget.id;
         var td = res.target.dataset.td;
-        console.log(id)
-        console.log(td)
+        // console.log(id)
+        // console.log(td)
         wx.navigateTo({
             url: '/pages/index/index?id=' + id,
         })
     },
     doIt: function(e) {
-        let a = e.target.dataset.num
-        let x = e.target.dataset.zan
-        let c = this.data.items0
+        let a = e.target.dataset.num //赞的电影再列表中的索引
+        let x = e.target.dataset.zan //电影点赞的状态
+        let c = this.data.items0  //电影列表
         x = !x;
         c[a].zan = x;
-        // console.log(a)
-        // console.log(x)
-        // console.log(c)
-        // console.log(c.zan)
         this.setData({
             items0: c
+        })
+    },
+    search: function () {
+        wx.navigateTo({
+            url: '../search/search'
         })
     }
 })

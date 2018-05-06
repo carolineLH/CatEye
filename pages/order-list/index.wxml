@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="no-order" wx:if="{{orderList}}">
+        <image src="/image/no-order.png" class="no-order-img"></image>
+        <view class="text">暂无订单</view>
+    </view>
+    <view >
+    <scroll-view class="goods-img-container" scroll-x="true" wx:if="{{show?true:false}}">
+        <image src="{{goodsMap.img}}" class="goods-img"></image>
+        <view class="good-bd">
+            <view class="right-top">
+                <text class="name">{{goodsMap.nm}}</text>
+                <text class="price">￥{{price}}</text>
+            </view>
+            <text class="number">X{{number}}</text>
+        </view>
+        <view class="clear"></view>
+    </scroll-view>
+    </view>
+    <view class="price-box" wx:if="{{show?true:false}}">
+        <view class="total-price">合计：¥ {{number*price}}</view>
+        <view class="btn cancel-btn" bindtap="cancelOrderTap">取消订单</view>
+        <view class="btn topay-btn" bindtap="toPayTap" data-money="{{number*price}}">马上付款</view>        
+    </view> 
+</view>

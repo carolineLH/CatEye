@@ -1,138 +1,85 @@
+// detail.js
+
 Page({
-    data: {
-        id: '',
-        imgsrc: '',
-        name: '',
-        score: '',
-        comment: '',
-        cat: '',
-        country: '',
-        showing: '',
-        duration: '',
-        desc: '',
-        dra: '',
-        imax: '',
-        threeD: '',
-        hideText: true,
+	data: {
+		hideText: true,
         hideClass: 'up',
-        comments: [],
-        photos: [],
-        timed: '',
-        zan: false,
-        items0: [{
-            image: "../../image/me.jpg",
-            name: '高枫',
-            work: '导演'
-        }, {
-            image: "../../image/me.jpg",
-            name: '朱荣',
-            work: '大魔王'
-        }, {
-            image: "../../image/me.jpg",
-            name: '严律己',
-            work: '男主角'
-        }, {
-            image: "http://p0.meituan.net/movie/fbe5f97c016c9f4520109dc70f458d4d83363.jpg",
-            name: '节目组',
-            work: '认真制作'
-        }, {
-            image: "http://p0.meituan.net/movie/fbe5f97c016c9f4520109dc70f458d4d83363.jpg",
-            name: '朱荣',
-            work: '猪脚'
-        }, {
-            image: "http://p0.meituan.net/movie/fbe5f97c016c9f4520109dc70f458d4d83363.jpg",
-            name: '朱荣',
-            work: '猪脚'
-        }, {
-            image: "http://p0.meituan.net/movie/fbe5f97c016c9f4520109dc70f458d4d83363.jpg",
-            name: '朱荣',
-            work: '猪脚'
-        }, {
-            image: "http://p0.meituan.net/movie/fbe5f97c016c9f4520109dc70f458d4d83363.jpg",
-            name: '朱荣',
-            work: '猪脚'
-        }],
-        items1: [{
-            data: "3",
-            title: "昨日票房排行"
-        }, {
-            data: "2579",
-            title: "首周票房（万）"
-        }, {
-            data: "3734",
-            title: "累计票房（万）"
-        }]
-    },
-    onLoad: function(e) {
-        // 生命周期函数--监听页面加载
-        console.log(e)
-        var that = this;
-        var id = e.id;
-        var td = e.td;
-        console.log(id);
-        var url = 'http://m.maoyan.com/movie/' + id + '.json';
-        wx.request({
-            url: url,
-            data: {},
-            method: 'GET',
-            header: { 'Content-type': 'application/json' },
-            success: function(res) {
-                var value = res.data.data.MovieDetailModel;
-                console.log(value)
-                let length = value.dra.length
-                that.setData({
-                    imgsrc: value.img,
-                    name: value.nm,
-                    score: value.sc,
-                    comment: value.snum,
-                    cat: value.cat,
-                    country: value.src,
-                    showing: value.rt,
-                    duration: value.dur,
-                    ver: value.ver,
-                    dra: value.dra.substring(3, length - 4),
-                    imax: value.imax,
-                    photos: value.photos
+        Common:[],
+        id:'',
+        zan:'/image/zan.png',
+        score:'/image/score.png',
+        like:'想看',
+        love:'评分'
+	},
+	onLoad(params){
+		const that = this;
+		var id = params.id,
+			  url = 'https://m.maoyan.com/movie/' + id + '.json'
+		// console.log(id)
+		wx.request({
+			url: url,
+			success(res){
+				// console.log(res);
+                let detail = res.data.data.MovieDetailModel,
+                    comment = res.data.data.CommentResponseModel.hcmts.splice(0,3)// 获取热门评论前三
+               
+                detail.dra = detail.dra.replace(/(<p>)|(<\/p>)/g,'');
+                var Common = res.data.data.CommentResponseModel.hcmts.splice(0,20);
+                var reply = res.data.data.CommentResponseModel.cmts.splice(0,10);
+                var all = Common.concat(reply);
+                console.log(all);
+				that.setData({
+					detail: detail,
+                    comment: comment,
+                    all: all,
+                    id: id
                 });
-                var text = value.dra;
-                var subtext = text.substring(3, text.length - 4);
-                that.setData({ desc: subtext });
-                /**
-                 * 获取评论
-                 */
-                that.setData({
-                    comments: res.data.data.CommentResponseModel.hcmts
-                        // timed: res.data.data.CommentResponseModel.hcmts.time.substring(4, 9)
-                })
-                console.log(res.data.data.CommentResponseModel)
-            }
+                wx.setStorage({
+                    key: "key",
+                    data: {
+                        comment:all
+                    }
+                });
+			}
         })
     },
-    showall: function() {
-        var that = this;
-        var hide = that.data.hideText;
-        var hideClass = that.data.hideClass == 'up' ? 'down' : 'up';
-        that.setData({
-            hideText: !hide,
-            hideClass: hideClass
-        })
+    commentsPage: function () {
+        wx.navigateTo({
+            url: '../comments/comments'
+        });
     },
-    zan: function(e) {
-        let a = e.target.dataset.num
-        let x = e.target.dataset.zan
-        let c = this.data.comments
-        if (x == 1) {
-            x = 0;
-        } else {
-            x = 1;
-        }
-        c[a].zan = x;
-        // console.log(a)
-        // console.log(x)
-        // console.log(c)
-        // console.log(c.zan)
+	toggleText(){
+		let hideText = this.data.hideText,
+			hideClass = this.data.hideClass == 'up' ? 'down' : 'up';
+		this.setData({
+			hideText: !hideText,
+			hideClass: hideClass
+		})
+    },
+    buy: function () {
+        var id = this.data.id;
+        // console.log(id);
+        wx.navigateTo({
+            url: '../order/order?id='+id,
+          });
+    },
+    love: function(e) {
         this.setData({
-            comments: c
+            zan:'/image/love.png',
+            like:'已想看'
+        })
+        var detail = this.data.detail;
+        wx.setStorage({
+            key:"love",
+            data:{
+                detail:this.data.detail
+            }
+          })
+    },
+    score: function() {
+        this.setData({
+            score:'/image/rename.png',
+            love:'已评分'
         })
     }
 })

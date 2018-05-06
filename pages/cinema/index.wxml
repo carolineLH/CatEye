@@ -1,30 +1,30 @@
 <view class="container">
 
         <view class="header">
-            <view class="header_hd" bindtap="goLocaltion"><text>{{city}}</text><view class="downtips"></view></view>
+            <view class="header_hd" bindtap="goLocaltion"><text>{{city}}</text><view class="downtips"></view>
+            </view>
             <view class="header_bd">
                 <input type="text" class="input" placeholder="请搜索"/>
             </view>
         </view>
 
         <scroll-view>
-            <scroll-view class="item" wx:for="{{items}}" wx:for-item="cinema">
-                <view class="item-left"  hover-class="gray_hover" hover-stay-time="100">
-                    <view class="item-left_title">{{cinema.nm}}
-                    <text class="item-left_score">{{cinema.price}}<text class="priceStart">元起</text></text></view>
-                    <view class="item-left_address">{{cinema.addr}}</view>
+            <scroll-view class="item" wx:for="{{location}}" wx:for-item="item">
+                <view class="item-left"  hover-class="gray_hover" hover-stay-time="100" bindtap="buyPage">
+                    <view class="item-left_title">{{item.nm}}
+                    <text class="item-left_score">{{item.sellPrice}}<text class="priceStart">元起</text></text></view>
+                    <view class="item-left_address">{{item.addr}}</view>
                     <view class="item-left_mark">
                     <!--此处用循环解决-->
                         <view>
                             <text wx:for="{{ways}}" wx:for-item="item" class="mark" style="color:{{item.color}};border-color:{{item.color}}">{{item.w}}</text>
                         </view>
                     </view>
-                    <view class="Discount-desc"><text>惠</text>{{cinema.discount}}</view>
-                    <view class="Discount-card"><text>卡</text>{{cinema.card}}</view>
+                    <view class="Discount-desc"><text>惠</text>{{item.showCount}}</view>
+                    <view class="Discount-card"><text>卡</text>限时{{item.sellPrice}}开卡，首单更优惠</view>
                 </view>
-
-                <view class="item-right">
-                    <view class="item-right_distance">{{cinema.distance}}</view>
+                <view class="item-right" bindtap="buyPage">
+                    <view class="item-right_distance">{{item.distance}}KM</view>
                 </view>
             </scroll-view>
         </scroll-view>

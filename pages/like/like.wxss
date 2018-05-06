@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    background-color: #F2f2f2;
+}
+.movieList {
+    width: 90%;
+    margin:auto;
+    border-bottom: 1rpx solid #999999;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.movieList .img {
+    width: 80px;
+    height: 100px;
+}
+.movieList .right {
+    width: 70%;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.clear {
+    clear: both;
+}

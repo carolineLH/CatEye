@@ -1,0 +1,15 @@
+<view class="comments">
+    <view style='padding:5px 20px;font-size:14px;border-bottom:1px solid #ccc;border-top:1px solid #ccc'>
+			<text>所有评论({{comment.length}})条</text>
+		</view>
+		<view class='item' wx:for='{{comment}}' wx:key='{{index}}'>
+			<view class='img'>
+				<image src='{{item.avatarurl}}' />
+			</view>
+			<view class='main'>
+				<view class='nickname'>{{item.nickName}}</view>
+				<view class='content'>{{item.content}}</view>
+				<view class="time">{{item.time}}</view>
+			</view>
+		</view>
+</view>

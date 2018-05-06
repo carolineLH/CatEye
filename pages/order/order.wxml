@@ -1,0 +1,57 @@
+<view class='order'>
+	<view class="top">
+        <view class='image'>
+            <image src='{{detail.img}}' />	
+        </view>
+        <view class='desc'>
+            <view>
+                <title style='font-weight:600;font-size:18px;'>{{detail.nm}}</title>
+            </view>
+            <view>
+                <text style='color:orange;font-size:12px;float:right'>评分：{{detail.sc}}</text>
+            </view>
+            <view class="clear"> 
+            </view>
+            <view>
+                <text style='font-size:14px;'>{{detail.src}}/ {{detail.dur}}分钟</text>
+            </view>
+            <view class="abloutCinema">
+                <view class="cinema">
+                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{cinema}}">
+                        <view class="picker {{selCinema == '请选择'?'hui':''}}">
+                        选择影院：{{cinema[index]}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="addr">
+                    <text style='font-size:14px'>地址：{{location.addr}}</text>
+                </view>
+                <view class="price">
+                    <text data-price="{{location.sellPrice}}">￥{{location.sellPrice}}元</text>
+                </view>
+            </view>
+		</view>
+	</view>
+	<view class='foot'>
+        <view class="buyIt item" bindtap="buyIt">立即购买</view>
+	</view>
+
+    <view class="show-popup" hidden="{{hideShopPopup}}" >
+        <view class="popup-mask" bindtap="closePopupTap"></view>
+        <view class="popup-contents">
+            <view class="buy-num-box">
+                <view class="num-label">购买数量</view>
+                <view class="num-box">
+                    <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+                    <view class="num-input">
+                        <input  type="number" value="{{buyNumber}}" disabled/>
+                    </view>
+                    <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+                </view>  
+            </view>  
+            <view class="popup-join-btn" wx:if="{{shopType =='tobuy'}}" bindtap="buyNow">
+            立即购买
+            </view>   
+        </view>                 
+    </view>
+</view>

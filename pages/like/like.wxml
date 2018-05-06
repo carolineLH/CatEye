@@ -1,0 +1,10 @@
+<view class="container">
+    <scroll-view class="movieList" scroll-x="true">
+        <image src="{{detail.img}}" class="img"></image>
+        <view class="right">
+            <view class="name">{{detail.nm}}</view>
+            <view class="rt">{{detail.rt}}</view>
+        </view>
+        <view class="clear"></view>
+    </scroll-view>
+</view>

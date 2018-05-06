@@ -1,7 +1,7 @@
 <view class="container">
     <scroll-view>
         <view class="header">
-            <view class="header_hd" bindtap="goLocaltion"><text>{{city}}</text>
+            <view class="header_hd" bindtap="goLocaltion" data-city="city"><text>{{city}}</text>
                 <view class="downtips"></view>
             </view>
             <view class="header_bd">
@@ -9,7 +9,7 @@
                 <view class="header_bd-waiting check" style="color:{{isleft?'#666':'#ef4238'}}" bindtap="tabChangewaiting">待映</view>
                 <view class="bottomLine" style="left:{{isleft?'43px':'113px'}}"></view>
             </view>
-            <view class="header_ft">
+            <view class="header_ft" bindtap="search">
                 <image src="../../image/icon_magnifier.png"></image>
             </view>
         </view>

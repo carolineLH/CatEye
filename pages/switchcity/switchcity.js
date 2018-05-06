@@ -15,11 +15,10 @@ Page({
         city: ""
     },
     onLoad: function(options) {
-        // 生命周期函数--监听页面加载
+        // 生命周期函数--监听页面加载      
         var searchLetter = city.searchLetter;
         var cityList = city.cityList();
-        // console.log(cityInfo);
-
+    
         var sysInfo = wx.getSystemInfoSync();
         console.log(sysInfo);
         var winHeight = sysInfo.windowHeight;

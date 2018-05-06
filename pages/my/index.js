@@ -17,6 +17,23 @@ Page({
             })
         })
     },
+    onShow: function () {
+        this.getUserInfo();
+    },
+    getUserInfo: function (cb) {
+        var that = this
+        wx.login({
+          success: function () {
+            wx.getUserInfo({
+              success: function (res) {
+                that.setData({
+                  userInfo: res.userInfo
+                });
+              }
+            })
+          }
+        })
+    },
     onReady: function() {
         console.log('ready');
         wx.setNavigationBarTitle({

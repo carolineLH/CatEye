@@ -1,0 +1,32 @@
+<view class="wxSearch-section">
+    <view class="wxSearch-pancel">
+        <input bindinput="wxSearchInput" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="搜索" />
+        <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">搜索</button>
+    </view>
+    
+    <view  class="wxSearchInner">
+        <view class="wxSearchKey">
+            <text class="wxSearchTitle">热门搜索</text>
+            <view class="wxSearchKeyList">
+                <block wx:for="{{hotList}}" wx:for-item="{{item}}" index="item.index">
+                    <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap">{{item.value}}</view>
+                </block>
+            </view>
+        </view>
+        <view class="wxSearchHistory">
+            <text class="wxSearchTitle">搜索历史</text>
+            <view wx:if="{{wxSearchData.his[0]}}" class="wxSearchHistoryList">
+                <block wx:for="{{wxSearchData.his}}">
+                    <view class="wxSearchHistoryItem">
+                        <text class="wxSearchHistoryItemText" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</text> 
+                        <text class="wxSearchHistoryItemDel" bindtap="wxSearchDeleteKey" data-key="{{item}}" data-key="{{item}}">删除</text>
+                    </view>
+                </block>
+                <view class="wxSearchDeleteAllBtn" bindtap="wxSearchDeleteAll">清除历史</view>
+            </view>
+            <view wx:else>
+                <view class="wxSearchHistoryEmpty">搜索历史为空</view>
+            </view>
+        </view>
+    </view>
+</view>
