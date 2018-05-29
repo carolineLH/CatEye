@@ -1,5 +1,3 @@
-// detail.js
-
 Page({
 	data: {
 		hideText: true,
@@ -15,11 +13,9 @@ Page({
 		const that = this;
 		var id = params.id,
 			  url = 'https://m.maoyan.com/movie/' + id + '.json'
-		// console.log(id)
 		wx.request({
 			url: url,
 			success(res){
-				// console.log(res);
                 let detail = res.data.data.MovieDetailModel,
                     comment = res.data.data.CommentResponseModel.hcmts.splice(0,3)// 获取热门评论前三
                
@@ -58,7 +54,6 @@ Page({
     },
     buy: function () {
         var id = this.data.id;
-        // console.log(id);
         wx.navigateTo({
             url: '../order/order?id='+id,
           });

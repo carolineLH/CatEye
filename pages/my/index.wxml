@@ -1,5 +1,11 @@
 <view class="container">
     <view class="page">
+        <button 
+            wx:if="{{canIUse}}" 
+            open-type="getUserInfo" 
+            bindgetuserinfo="bindGetUserInfo"
+        >授权登录</button>
+        <view wx:else>请升级微信版本</view>
         <view class="userinfo">
             <image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
             <text class="userinfo-nickname">{{ userInfo.nickName }}</text>

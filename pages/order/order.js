@@ -10,36 +10,38 @@ Page({
         selCinema:'请选择',
         detail: '',
         cinema: [
-            '博纳国际影城(铜锣湾店)',
-            '大地影院(五湖国际店)',
-            '恒大影城(南昌名都店)',
-            '嘉华时代影城',
-            '冷杉欢腾影城(上海北路店)',
-            '南昌风云影城(领袖店)',
-            '天智创客影城(江西财经大学麦庐店)',
-            '万达国际影城(红谷滩店)',
-            '万达影城(达观店)',
-            '完美世界影城(17.5乐买佳店)',
-            '星美国际商城(梦时代IMAX店)',
-            '星天地国际影城',
-            '星轶IMAX影城(南昌吾悦广场旗舰店)',
-            '中影天幕国际影城(高新艺术中心店)',
-            '亚影影城'
-        ]
+            '九州华辰国际影城（理工店）',
+            '九州华辰国际影城（麦庐财大店）',
+            '完美世界店（17.5乐买佳店）',
+            '万达国际影院（红谷滩店）',
+        ],
+        multiArray: [['5月26日','5月27日','5月28日'],['10:15','12:25','13:15','14:20','15:10','16:15','18:10']],
+        multi:[['1排','2排','3排','4排','5排','6排','7排','8排','9排','10排'],['1座','2座','3座','4座','5座','6座','7座','8座','9座','10座','11座','12座']],
+        location:[{
+            "price": "29",
+            "addr": "青山湖经济技术开发区华东交大理工学院",
+        }, {
+            "price": "32",
+            "addr": "青山湖经济技术开发区江西财经大学麦庐园店",
+        }, {
+            "price": "33",
+            "addr": "青山湖区榴云路商业街88号乐麦佳四楼",
+        }, {
+            "price": "32",
+            "addr": "红谷滩万达广场",
+        }]
     },
     onLoad: function(options) {
         var that = this;
         this.setData({
             id: options.id
         })
-        // console.log(this.data.id);
         var id = this.data.id,
             url = 'https://m.maoyan.com/movie/' + id + '.json' 
         wx.request({
             url: url,
             success: function(res) {
                 var detail = res.data.data.MovieDetailModel;
-                // console.log(detail);
                 that.setData({
                     detail: detail
                 })
@@ -50,38 +52,49 @@ Page({
         if (this.data.selCinema == "请选择") {
             wx.showModal({
                 title: '提示',
-                content: '请选择影院',
+                content: '请选择影院,观影时段和座位',
                 showCancel:false
               })
               return
         } 
     },
-    bindPickerChange: function (e) {
-        const that = this;
+    bindMultiPickerChange: function (e) {
+        // console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            index: e.detail.value
+            multiIndex: e.detail.value
           })
-        // console.log(e.detail.value);
+       var dateId = this.data.multiIndex[0];
+       var date = this.data.multiArray[0][dateId];
+       var timeId = this.data.multiIndex[1];
+       var time = this.data.multiArray[1][timeId];
+       var Time = date + ' '+time;
+       this.setData({
+           Time: Time
+       })
+      },
+    bindMultiPicker: function(e) {
+        this.setData({
+            multiId: e.detail.value
+        })
+        var id = this.data.multiId[0];
+        var row = this.data.multi[0][id];
+        var Id = this.data.multiId[1];
+        var column = this.data.multi[1][Id];
+        var Seat = row + ' ' + column;
+        this.setData({
+            Seat:Seat
+        })
+      },
+    bindPickerChange: function (e) {
         var index = e.detail.value;
-        wx.request({
-            url: 'https://m.maoyan.com/cinemas.json',
-            method: "GET",
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res){
-                // console.log(res);
-                var location = res.data.data;
-                var locationArr = [];
-                for (var i in location) {
-                    locationArr.push(location[i]);
-                }
-                // console.log(locationArr[0]);
-                that.setData({
-                    location: locationArr[0][index]
-                });
-            }
+        this.setData({
+            index: e.detail.value,
+            Cinema: this.data.cinema[index]
+          })
+        this.setData({
+            location: this.data.location[index]
         });
+        var Cinema = this.data.cinema[index];
     },
     addToShopCart: function () {
         this.setData({
@@ -108,7 +121,6 @@ Page({
                buyNumber: currentNum
            })  
         }
-        console.log(this.data.buyNumber);
      },
     numJiaTap: function() {
            var currentNum = this.data.buyNumber;
@@ -118,10 +130,11 @@ Page({
            })  
      },
     buyNow: function () {
-        var price = this.data.location.sellPrice;
-        // console.log(price);
+        var price = this.data.location.price;
         var number = this.data.buyNumber;
-        // console.log(number);
+        var Time = this.data.Time;
+        var Cinema = this.data.Cinema;
+        var Seat = this.data.Seat;
         if(this.data.buyNumber == 0){
             wx.showModal({
                 title: '提示',
@@ -137,7 +150,7 @@ Page({
             }
           })
         wx.navigateTo({
-            url: '../order-list/index?price='+price+'&number='+number
+            url: '../order-list/index?price='+price+'&number='+number+'&Time='+Time+'&Cinema='+Cinema+'&Seat='+Seat
         });
     }
 })

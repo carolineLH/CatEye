@@ -17,6 +17,13 @@
             </view>
             <view class="abloutCinema">
                 <view class="cinema">
+                    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                        <view class="picker {{selCinema == '请选择'?'hui':''}}">
+                        选择时段：{{multiArray[0][multiIndex[0]]}}  {{multiArray[1][multiIndex[1]]}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="cinema">
                     <picker bindchange="bindPickerChange" value="{{index}}" range="{{cinema}}">
                         <view class="picker {{selCinema == '请选择'?'hui':''}}">
                         选择影院：{{cinema[index]}}
@@ -27,7 +34,14 @@
                     <text style='font-size:14px'>地址：{{location.addr}}</text>
                 </view>
                 <view class="price">
-                    <text data-price="{{location.sellPrice}}">￥{{location.sellPrice}}元</text>
+                    <text data-price="{{location.price}}">￥{{location.price}}元</text>
+                </view>
+                <view class="seat">
+                    <picker mode="multiSelector" bindchange="bindMultiPicker" bindcolumnchange="bindMultiPicker" value="{{multiId}}" range="{{multi}}">
+                        <view class="picker {{selCinema == '请选择'?'hui':''}}">
+                        选座：{{multi[0][multiId[0]]}}  {{multi[1][multiId[1]]}}
+                        </view>
+                    </picker>
                 </view>
             </view>
 		</view>

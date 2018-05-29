@@ -12,7 +12,7 @@ Page({
         duration: 1200,
         checked: true,
         isleft: true,
-        city: "南昌",
+        city: '南昌',
         id: '',
         items: [],
         items0: [],
@@ -43,12 +43,10 @@ Page({
     },
 
     onShow: function() {
-        console.log('Onshow')
         let that = this;
         wx.getStorage({
             key: 'key',
             success: function(res) {
-                // console.log(res.data.cardmes.city);
                 that.setData({
                     city: res.data.cardmes.city,
                 })
@@ -80,8 +78,6 @@ Page({
     BuyIt: function(res) {
         var id = res.currentTarget.id;
         var td = res.target.dataset.td;
-        // console.log(id)
-        // console.log(td)
         wx.navigateTo({
             url: '/pages/index/index?id=' + id,
         })

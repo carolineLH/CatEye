@@ -11,7 +11,10 @@
                 <text class="name">{{goodsMap.nm}}</text>
                 <text class="price">￥{{price}}</text>
             </view>
-            <text class="number">X{{number}}</text>
+            <view class="number">数量：X{{number}}</view>
+            <view class="time">观影时间：{{Time}}</view>
+            <view class="cinema">影院：{{Cinema}}</view>
+            <view class="seat">座位：{{Seat}}</view>
         </view>
         <view class="clear"></view>
     </scroll-view>
@@ -21,4 +24,13 @@
         <view class="btn cancel-btn" bindtap="cancelOrderTap">取消订单</view>
         <view class="btn topay-btn" bindtap="toPayTap" data-money="{{number*price}}">马上付款</view>        
     </view> 
+    <view wx:if="{{model?true:false}}" class="bounced">
+        <view class="shadow">
+            <view class="content">
+                <image src="/image/payed.png" class="paied"></image>
+                <view class="pay-text">支付成功！</view>
+                <view class="pay" bindtap="closed">确定</view>
+            </view>
+        </view>
+    </view>
 </view>
